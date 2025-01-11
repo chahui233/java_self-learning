@@ -258,8 +258,8 @@ javadoc -d javaapi Test.java
 - 名字，标识符，方便以后访问
 - 保存的值，变量保存的数据
 
-变量的声明定义：数据类型 变量名：int nianLing
-在Java中，变量声明后必须赋值才能访问。变量可以声明的时候赋值
+变量的声明定义：数据类型+变量名
+在Java中，变量声明后必须赋值才能访问。变量可以声明的时候赋值，一行上可以同时声明多个变量
 
 ```java
 public class VarTest02{
@@ -278,3 +278,76 @@ public class VarTest02{
 	}
 }
 ```
+
+```java
+//自上而下
+public class VarTest03{
+	public static void main(String[] args){
+		//错误
+		System.out.println(k);
+		int k=10;
+	}
+}
+```
+
+```java
+//在同一个域中，变量名不能重名（与类型无关）
+public class VarTest04{
+	public static void main(String[] args){
+		int nianLing = 20;
+		System.out.println(nianLing);
+		nianLing = 30;
+		System.out.println(nianLing);
+		//错误
+		int nianLing = 100;
+		System.out.println(nianLing);
+		//错误
+		double nianLing = 20.5;
+		System.out.println(nianLing);
+	}
+}
+```
+
+变量的分类：
+- 局部变量：在方法体当中声明的变量，只在方法体当中有效，方法体执行结束该变量的内存就释放了。
+- 成员变量：在方法体之外，类体内声明的变量。
+重点依据是声明的位置
+
+```java
+public class VarTest07{
+	//成员变量
+	int i = 100;
+	//主方法
+	public static void main(String[] args){
+		//局部变量
+		int k = 100;//main方法结束k内存空间释放
+	}
+}
+```
+
+变量的作用域：出了大括号就不认识了
+就近原则，哪个离得近就访问哪个
+```java
+public class VarTest08{
+	int i = 10000;
+	public static void main(String []args){
+		int i = 100;
+		System.out .println(i);//就近原则，所以这里输出应该是100
+		int i = 90;//同一个域中不允许
+		for(int n = 0; n < 10; n++){ //这里的n只属于for域，for结束后n就会释放
+			//代码
+		}
+		//System.out.println(n);//错误，无法访问
+		int k;
+		for(k = 0;k < 10;k++){
+			
+		}
+		System.out .println(k);
+	}
+	public static void x(){
+		System.out.println(i);//无法访问
+		int i = 200;//这个i和main方法中的i不在同一个域中，不冲突
+	}
+}
+```
+
