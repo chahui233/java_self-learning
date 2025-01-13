@@ -351,3 +351,26 @@ public class VarTest08{
 }
 ```
 
+
+# 数据类型
+
+数据类型用来声明变量，程序在运行过程中根据不同的数据类型分配不同大小的空间。
+在Java中数据类型有两种：
+- 基本数据类型（4大类8小种）：
+	- 整数型 byte,short,int,long
+	- 浮点型 float,double
+	- 布尔型 boolean 只有两个值true和false
+	- 字符型 char 必须用单引号括起来
+- 引用数据类型
+
+| 类型      | 占用字节数量(byte) |
+| ------- | ------------ |
+| byte    | 1            |
+| short   | 2            |
+| int     | 4            |
+| long    | 8            |
+| float   | 4            |
+| double  | 8            |
+| boolean | 1            |
+| char    | 2            |
+
