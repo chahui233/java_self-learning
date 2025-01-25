@@ -6,10 +6,10 @@ public class VarTest04{
 		nianLing = 30;
 		System.out.println(nianLing);
 		//错误
-		int nianLing = 100;
+		//int nianLing = 100;
 		System.out.println(nianLing);
 		//错误
-		double nianLing = 20.5;
+		//double nianLing = 20.5;
 		System.out.println(nianLing);
 	}
 }
