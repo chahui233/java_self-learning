@@ -542,3 +542,45 @@ public class IntTest04 {
 }
 
 ```
+
+- 当一个整数赋值给char类型变量的时候，会自动转换成char字符型，最终的结果是一个字符。
+- 当一个整数没有超出byte,short,char取值范围的时候，这个整数可以直接赋值给变量。
+
+```java
+public class CharTest03{
+    public static void main(String[] args) {
+
+        char c1 = 'a';
+        System.out.println(c1);
+
+        //97是int类型，此处不需要转换
+        char c2 = 97;
+        System.out.println(c2);
+
+        //char类型取值范围0～65535
+        char c3 = 65535;
+        System.out.println(c3);
+        
+        //错误，不兼容的类型
+        //char c4 = 65536;
+        char c4 = (char)65536;//强制类型转换
+        System.out.println(c4);
+    }
+}
+```
+
+二进制原码反码补码
+```java
+public class IntTest05 {
+    public static void main(String[] args) {
+        //byte b = 150;
+        //150的二进制码为00000000 00000000 00000000 10010110
+        //强转为byte后为10010110，是一个二进制补码
+        //逆推反码为10010101,原码为11101010，即-106
+        byte b = (byte)150;
+        System.out.println(b);//结果输出-106
+    }
+}
+
+```
+
