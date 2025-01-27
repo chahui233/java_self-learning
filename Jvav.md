@@ -363,14 +363,182 @@ public class VarTest08{
 	- 字符型 char 必须用单引号括起来
 - 引用数据类型
 
-| 类型      | 占用字节数量(byte) |
-| ------- | ------------ |
-| byte    | 1            |
-| short   | 2            |
-| int     | 4            |
-| long    | 8            |
-| float   | 4            |
-| double  | 8            |
-| boolean | 1            |
-| char    | 2            |
+| 类型      | 占字节数(byte) | 默认值      |
+| ------- | ---------- | -------- |
+| byte    | 1          | 0        |
+| short   | 2          | 0        |
+| int     | 4          | 0        |
+| long    | 8          | 0L       |
+| float   | 4          | 0.0f     |
+| double  | 8          | 0.0      |
+| boolean | 1          | false    |
+| char    | 2          | '\u0000' |
 
+## 字符型char
+
+- char占用2个字节
+- char的取值范围：[0,65535]
+- char采用unicode编码方式
+- char类型的字面量使用单引号括起来
+- char可以存储一个汉字
+```java
+public class CharTest01{
+	public static void main(String[] args){
+		char c1='中';
+		System.out.println(c1);
+		char c2='a';
+		System.out.println(c2);
+		char c3='0';
+		System.out.println(c3);
+		//char c4="a";
+		//错误，字符常量要用单引号括起来
+		//char c5='ab';
+		//错误，字符常量只能有一个字符
+	}
+}
+```
+
+```java
+public class CharTest02 {
+    public static void main(String[] args){
+        //这是一个字符
+        char c1 = 't';
+        System.out.println(c1);
+        //这是转义字符，实际上是一个字符
+        char c2 = '\t';//制表符，相当于按了Tab键
+        System.out.println(c2);
+
+        System.out.println("abctdef");
+        // \的出现会将后面的字符变成转义字符
+        System.out.println("abc\tdef");
+
+        System.out.print("abc");//print()方法不会换行
+        char c3 = '\n';//换行符，相当于按了回车键
+        System.out.println(c3); //此处相当于两个换行
+        System.out.println("def");
+
+        //输出一个单引号，需要使用\'
+        System.out.println('\'');
+        //输出一个\，需要使用\\
+        System.out.println("\\");
+
+        System.out.println("\"test\"");
+
+        //反斜杠u后面是一个十六进制的Unicode编码
+        char x = '\u4e2d';
+        System.out.println(x);
+    }
+}
+
+```
+
+## 整数型int
+
+```java
+public class IntTest01 {
+    public static void main(String[] args) {
+        //十进制
+        int a = 10;
+        System.out.println(a);
+
+        //八进制
+        int b = 010;
+        System.out.println(b);
+
+        //十六进制
+        int c = 0x10;
+        System.out.println(c);
+        int x = 16;
+        System.out.println(x);
+
+        //二进制
+        int d = 0b10;
+        System.out.println(d);
+    }
+}
+
+```
+
+在任何情况下，整数型的“字面量/数据”默认被当作int类型处理。如果希望被当作long来处理，需要在后面添加L
+
+```java
+public class IntTest02 {
+    public static void main(String[] args) {
+        //不存在类型转换
+        int a = 100;
+        System.out.println(a);
+
+        //小容量可以自动转换为大容量，自动类型转换
+        long b = 200;
+        System.out.println(b);
+
+        //不存在类型转换
+        long c = 300L;
+        System.out.println(c);
+
+        //2147483647是int最大值
+        long d = 2147483647;
+        System.out.println(d);
+
+        //2147483648超出了int范围
+        //long e = 2147483648;
+        long e = 2147483648L;
+        System.out.println(e);
+    }
+}
+
+```
+
+小容量可以直接赋值给大容量，但大容量不能直接赋值给小容量，需要使用强制类型转换符进行强转。运行时可能会损失精度。
+
+```java
+public class IntTest03 {
+    public static void main(String[] args) {
+        //不存在强制类型转换
+        long x = 100L;
+
+        //编译错误，不兼容的类型
+        //int y = x;
+        int y = (int)x;//强制类型转换
+        System.out.println(y);
+
+        int a = 100;
+        System.out.println(a);
+
+        int b = a;
+        System.out.println(b);
+    }
+}
+
+```
+
+当这个整数型字面量没有超出byte的取值范围，那么这个整数型字面量可以直接赋值给byte类型的变量
+
+```java
+public class IntTest04 {
+    public static void main(String[] args) {
+        //错误
+        //byte b = 300;
+
+        //300对应的二进制是：00000000 00000000 00000001 00101100
+        //byte类型只能存储8位，所以只取后8位：00101100
+        byte b = (byte)300;
+        System.out.println(b);//44
+
+        byte x = 1;
+        System.out.println(x);
+        byte y = 127;
+        System.out.println(y);
+        //错误
+        //byte z = 128;
+
+        short s = 1;
+        System.out.println(s);
+        short s1 = 32767;
+        System.out.println(s1);
+        //错误
+        //short s2 = 32768;
+    }
+}
+
+```
