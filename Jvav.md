@@ -584,3 +584,77 @@ public class IntTest05 {
 
 ```
 
+byte,short,char做混合运算的时候，各自先转换成int再做计算
+```java
+public class IntTest06 {
+    public static void main(String[] args) {
+        
+        char c1 = 'a';
+        byte b = 1;
+        
+        //注意这里的+是加法运算
+        System.out.println(c1 + b);
+
+        //错误，不兼容的类型: 从byte转换到char可能会有损失
+        //编译器不知道加法最后结果，只知道是int类型
+        //short s = c1 + b;
+        short s = (short)(c1 + b);
+        System.out.println(s);
+
+        
+    }
+}
+
+```
+
+除上面情况，多种数据类型做混合运算的时候，最终结果的类型是最大容量对应的类型
+```java
+public class IntTest07 {
+    public static void main(String[] args) {
+        
+        long a = 10L;
+        char c = 'a';
+        short s = 100;
+        int i = 30;
+
+        System.out.println(a + c + s + i); // 237
+
+        //错误，不兼容的类型: 从long转换到int可能会有损失
+        //int x = a + c + s + i;
+        int x = (int)(a + c + s + i);
+        System.out.println(x);
+        
+    }
+}
+
+```
+
+## 浮点型
+
+
+| float  | 单精度 | 4字节 | 容量大 |
+| ------ | --- | --- | --- |
+| double | 双精度 | 8字节 | 更精确 |
+精度更高的类型 java.math.BigDecimal，常用于财务
+float和double储存的都是近似值
+java中规定，任何一个浮点数据默认被当作double来处理。如果想转为float，需要在字面量后面加f或F
+```java
+public class FloatTest01 {
+    public static void main(String[] args) {
+        
+        //不存在类型转换
+        double pi = 3.1415926;
+        System.out.println(pi);
+
+        //错误，不兼容的类型
+        //float f = 3.14;
+        float f = 3.14f;
+        //强制类型转换，可能会丢失精度
+        float F = (float)3.14;
+
+        System.out.println(f);
+    }
+    
+}
+
+```
